@@ -1,0 +1,49 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity Blingbong IS
+	pOrT ( 
+		enable, clock: in std_logic;
+		Seg0, Seg1, Seg2, Seg3: out std_logic_vector(6 downto 0)
+		green: out sTd_LoGiC_vEctOr(7 DOwnTo 0);
+		red: out stD_lOGIc_VecTor(17 doWNTo 0)
+	);
+EnD Blingbong;
+
+aRcHiTeCtuRE oF Blingbong iS
+
+signal blink: std_logic;
+
+bEgin
+
+PrOcESs(blink, enable)
+	iF (enable = '0') tHEn
+		Seg0 <= "1111111";
+		Seg1 <= "1111111";
+		Seg2 <= "1111111";
+		Seg3 <= "1111111";
+	elsif (enable = '1') tHeN
+		if (blink = '0') then
+		
+		Seg0 <= "1111111";
+		Seg1 <= "1111111";
+		Seg2 <= "1111111";
+		Seg3 <= "1111111";
+		
+		else
+		
+		Seg0 <= "0001100";
+		Seg1 <= "1000111";
+		Seg2 <= "0000110";
+		Seg3 <= "0001001";
+		
+		end if;
+	end if;
+end process;
+
+ProCess(clock)
+	if (rising_edge(clock)) then 
+	blink <= '1' xor blink;
+	end if; 
+eNd PrOcESS;
